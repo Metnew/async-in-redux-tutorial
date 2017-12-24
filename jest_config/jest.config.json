@@ -1,0 +1,6 @@
+{
+	"moduleFileExtensions": ["js", "jsx"],
+	"rootDir": "../",
+	"setupFiles": ["<rootDir>/jest_config/setupJest.js"],
+	"automock": false
+}
