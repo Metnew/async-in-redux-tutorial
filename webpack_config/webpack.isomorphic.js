@@ -24,7 +24,6 @@ export default {
 			reducers: `${srcCommonPath}/reducers/`,
 			routing: `${srcCommonPath}/routing/`,
 			styles: `${srcCommonPath}/styles/`,
-			types: `${srcCommonPath}/types`,
 			selectors: `${srcCommonPath}/selectors`,
 			static: `${rootPath}/static`,
 			images: `${rootPath}/static/images`
