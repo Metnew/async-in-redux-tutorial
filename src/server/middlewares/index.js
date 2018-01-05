@@ -8,13 +8,8 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
-import Raven from 'raven'
 
 export default (app: express$Application): express$Application => {
-	// Must configure Raven before doing anything else with it
-	Raven.config(process.env.SENTRY_DSN).install()
-	// The request handler must be the first middleware on the app
-	app.use(Raven.requestHandler())
 	// remove x-powered-by
 	app.disable('x-powered-by')
 	// Add express stuff
@@ -28,23 +23,6 @@ export default (app: express$Application): express$Application => {
 		})
 	)
 	app.use(bodyParser.json())
-	// The error handler must be before any other error middleware
-	app.use(Raven.errorHandler())
-	// Optional fallthrough error handler
-	// eslint-disable-next-line
-	app.use(function onError(
-		err,
-		req: express$Request,
-		res: express$Response,
-		next: express$NextFunction
-	) {
-		// NOTE: @Metnew: line disabled by ESlint, because err is already handled by sentry
-		//
-		// The error id is attached to `res.sentry` to be returned
-		// and optionally displayed to the user for support.
-		res.statusCode = 500
-		res.end(res.sentry + '\n')
-	})
 
 	return app
 }
