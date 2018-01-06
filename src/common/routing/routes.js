@@ -169,7 +169,7 @@ const routes: Array<RouteItem> = [
 const sidebarExternalLinks = [
 	{
 		external: true,
-		path: 'https://github.com/Metnew/suicrux',
+		path: 'https://github.com/Metnew/async-in-redux-tutorial',
 		meta: {
 			sidebarVisible: true,
 			icon: 'github',

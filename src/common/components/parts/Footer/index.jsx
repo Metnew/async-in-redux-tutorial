@@ -13,10 +13,10 @@ const Footer = () => {
 					<Grid.Row verticalAlign="middle">
 						<Grid.Column width={12} mobile={16}>
 							<a href="https://github.com/Metnew">
-								<Header as="h3" inverted>
+								<Header as="h3">
 									<Icon name="github" />
 									<Header.Content>
-										50 shades of asynchrony
+										Async in Redux
 										<Header.Subheader>
 											by @Metnew
 										</Header.Subheader>

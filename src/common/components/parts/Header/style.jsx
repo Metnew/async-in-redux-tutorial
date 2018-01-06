@@ -1,12 +1,10 @@
 import styled from 'styled-components'
 import {media} from 'styles/utils'
-import {Button} from 'semantic-ui-react'
+
 export const StyledHeader = styled.header`
-	background: ${props => props.theme.primaryColor};
-	border-bottom: 1px solid ${props => props.theme.primaryColorDark};
-	box-shadow: inset 0 0 0 0 ${props => props.theme.primaryColorDark},
-		0 2px 1px 0 ${props => props.theme.primaryColorDark};
-	color: ${props => props.theme.primaryColorText};
+	background: #f6f6f6;
+	border-bottom: 1px solid #eee;
+	box-shadow: inset 0 0 0 0 #eee, 0 2px 1px 0 #eee;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -37,13 +35,4 @@ export const Navicon = styled.span`
 	${media.md`
 		display: block;
 	`};
-`
-
-export const HeaderButton = styled(Button)`
-	&#header-button {
-		align-self: center;
-		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-		color: ${props => props.theme.primaryColorText}!important;
-		background-color: ${props => props.theme.primaryColorDark}!important;
-	}
 `

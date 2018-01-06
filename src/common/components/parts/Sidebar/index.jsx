@@ -3,14 +3,12 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Menu, Icon} from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
-import {getLayoutState, getLayoutMobileStatuses, getSidebarRoutes} from 'selectors'
 import {
-	StyledSidebar,
-	SidebarLogo,
-	SidebarLogoContainer,
-	SidebarItem
-} from './style'
-import {Spacer} from 'styles/base'
+	getLayoutState,
+	getLayoutMobileStatuses,
+	getSidebarRoutes
+} from 'selectors'
+import {StyledSidebar} from './style'
 import type {RouteItem} from 'types'
 
 type Props = {
@@ -32,7 +30,8 @@ class SidebarComponent extends Component<Props> {
 			vertical: true,
 			icon: 'labeled',
 			animation: 'push',
-			width: 'thin'
+			width: 'thin',
+			inverted: true
 		}
 
 		const routes = routing.map((route, i) => {
@@ -61,31 +60,25 @@ class SidebarComponent extends Component<Props> {
 			}
 
 			return (
-				<SidebarItem key={i} {...propsMenuItem} icon>
+				<Menu.Item key={i} {...propsMenuItem} icon>
 					<Icon name={icon} /> {name}
-				</SidebarItem>
+				</Menu.Item>
 			)
 		})
 
-		return (
-			<StyledSidebar {...sidebarProps}>
-				<SidebarLogoContainer href="https://github.com/Metnew/suicrux">
-					<SidebarLogo alt="logo" shape="circular" centered />
-				</SidebarLogoContainer>
-				{routes}
-				<Spacer />
-			</StyledSidebar>
-		)
+		return <StyledSidebar {...sidebarProps}>{routes}</StyledSidebar>
 	}
 }
 
 const mapStateToProps = state => {
 	const {sidebarOpened} = getLayoutState(state)
+	const {location} = state.routing
 	const {isMobile} = getLayoutMobileStatuses(state)
 
 	return {
 		open: sidebarOpened,
-		isMobile
+		isMobile,
+		location
 	}
 }
 

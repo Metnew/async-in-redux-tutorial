@@ -8,7 +8,6 @@ import {withRouter, matchPath} from 'react-router'
 import _ from 'lodash'
 import {TOGGLE_SIDEBAR} from 'actions/layout'
 import {StyledHeader, HeaderInner, Navicon, PageTitle} from './style'
-import {Spacer} from 'styles/base'
 import {getLayoutMobileStatuses, getMetaRoutes} from 'selectors'
 import Headroom from 'react-headroom'
 
@@ -29,7 +28,6 @@ const Header = ({title, toggleSidebar, isMobile}: Props) => {
 						</Navicon>
 					)}
 					<PageTitle>{title}</PageTitle>
-					<Spacer />
 				</HeaderInner>
 			</StyledHeader>
 		</Headroom>
@@ -38,9 +36,8 @@ const Header = ({title, toggleSidebar, isMobile}: Props) => {
 
 const mapStateToProps = (state, props) => {
 	const {location: {pathname}} = props
-	const currentRoute =
-		_.find(getMetaRoutes(), a => matchPath(pathname, a)) || {}
-	const title = currentRoute.meta.name
+	const currentRoute = _.find(getMetaRoutes(), a => matchPath(pathname, a))
+	const title = currentRoute && currentRoute.meta && currentRoute.meta.name
 	const {isMobile} = getLayoutMobileStatuses(state)
 	return {
 		title,
