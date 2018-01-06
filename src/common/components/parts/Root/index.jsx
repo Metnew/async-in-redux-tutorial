@@ -2,8 +2,6 @@
 import React, {Component} from 'react'
 import {Provider} from 'react-redux'
 import {APPLICATION_INIT} from 'actions/common'
-import {ThemeProvider} from 'styled-components'
-import theme from 'styles/theme'
 import App from 'containers/App'
 import RoutingWrapper from 'components/parts/RoutingWrapper'
 
@@ -38,13 +36,11 @@ export default class Root extends Component<Props> {
 
 		return (
 			<Provider store={store} key={Date.now()}>
-				<ThemeProvider theme={theme}>
-					<Router {...routerProps}>
-						<App>
-							<RoutingWrapper />
-						</App>
-					</Router>
-				</ThemeProvider>
+				<Router {...routerProps}>
+					<App>
+						<RoutingWrapper />
+					</App>
+				</Router>
 			</Provider>
 		)
 	}
