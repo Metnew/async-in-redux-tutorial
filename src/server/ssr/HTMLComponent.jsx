@@ -5,8 +5,7 @@ type args = {
 	css: string,
 	asyncState: Object,
 	initialState: Object,
-	assets: Object,
-	faviconsAssets: Object
+	assets: Object
 }
 // renderToString
 const DLLScripts =
@@ -22,7 +21,6 @@ const HTMLComponent = ({
 	asyncState,
 	initialState,
 	assets,
-	faviconsAssets,
 	i18n
 }: args) => {
 	const stringifiedAsyncState: string = serealize(asyncState)
@@ -63,7 +61,6 @@ const HTMLComponent = ({
 				<base href="/" />
 				<meta name="msapplication-tap-highlight" content="no" />
 				<link rel="manifest" href="manifest.json" />
-				${faviconsAssets && faviconsAssets.html && faviconsAssets.html.join('')}
 				${css}
 				${cssTags}
 			<head>

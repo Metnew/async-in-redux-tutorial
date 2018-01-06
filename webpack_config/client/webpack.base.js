@@ -91,36 +91,6 @@ const baseBuild = {
 		new AssetsPlugin({
 			path: CLIENT_DIST_PATH
 		}),
-		// NOTE: this plugin is good, but there are few big issues:
-		// 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
-		// E.g: in generated index.html you can see:
-		// <meta name="msapplication-config" content="browserconfig.xml">
-		// 2. It looks like generated images aren't minified.(not sure)
-		// NOTE: It would be better to generate favicons without this plugin.
-		new FaviconsWebpackPlugin({
-			// add theme-color property
-			background: manifest.theme,
-			prefix: `favicons/`,
-			logo: path.join(rootPath, './static/images/Logo.png'),
-			title,
-			emitStats: true,
-			statsFilename: 'favicons-stats.json',
-			// Inject generated html into html-webpack-plugin
-			inject: false,
-			// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
-			icons: {
-				android: false,
-				appleIcon: true,
-				appleStartup: false,
-				coast: false,
-				favicons: true,
-				firefox: false,
-				opengraph: false,
-				twitter: true,
-				yandex: false,
-				windows: false
-			}
-		}),
 		new WebpackAssetsManifest({
 			assets: config.manifest
 		})

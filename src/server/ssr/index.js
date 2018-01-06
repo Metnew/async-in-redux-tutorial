@@ -13,7 +13,7 @@ import getStats from './stats'
 
 export default async (req: express$Request, res: express$Response) => {
 	// probably, it'd better to define these objs in global scope
-	const {assets, faviconsAssets} = await getStats()
+	const {assets} = await getStats()
 	const initialState: Object = {}
 	const sheet = new ServerStyleSheet()
 	const location: string = req.url
@@ -43,7 +43,6 @@ export default async (req: express$Request, res: express$Response) => {
 		const props = {
 			css,
 			assets,
-			faviconsAssets,
 			asyncState,
 			initialState: preloadedState
 		}
