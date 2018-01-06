@@ -9,13 +9,9 @@ import Awral from './awral'
  * @param  {Object} result - response from API
  * @return {Boolean} - indicates was request successful or not
  */
-const check = (result: Object = {ok: false}): boolean => result.ok
-// see ./awral
+const checkResultStatus = (result: Object = {ok: false}): boolean => result.ok
 const failBeforePending = null
 const transformResult = a => a.data
-// disable dispatch of *_FINALLY actions
-const finallyAction = null
-
 /**
   Create default Awral
   Awral is not recommended for production usage now
@@ -24,4 +20,4 @@ const finallyAction = null
   Awral is 910 bytes gzipped!
   some docs here: {@link https://github.com/Metnew/awral}
 */
-export const awral = Awral.of({check, failBeforePending, transformResult, finally: finallyAction})
+export const awral = Awral.of({checkResultStatus, failBeforePending, transformResult})

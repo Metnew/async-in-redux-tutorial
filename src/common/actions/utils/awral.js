@@ -8,19 +8,13 @@ const actionCreator = status => ({
 }
 
 const getDefaultBehaviours = () => {
-	const actions = [
-		'pending',
-		'success',
-		'fail',
-		'finally'
-	].map(a => {
-		return {[a]: actionCreator(a)}
-	})
+	const actions = ['pending', 'success', 'fail'].map(a => ({
+		[a]: actionCreator(a)
+	}))
 
-	const id = a => a
-	const ids = ['meta', 'check', 'fnPayload', 'transformResult', 'resolve'].map(
+	const ids = ['meta', 'checkResultStatus', 'transformPayload', 'transformResult', 'resolve'].map(
 		a => ({
-			[a]: id
+			[a]: a => a
 		})
 	)
 
@@ -38,7 +32,7 @@ const getDefaultBehaviours = () => {
   {@link https://github.com/Metnew/awral}
 */
 function Awral (asyncFunction) {
-	return ACTION_NAME => (...args) => async (dispatch, getState) => {
+	return ACTION_NAME => (...args) => (dispatch, getState) => {
 		const basicArgs = {dispatch, getState, ACTION_NAME}
 		const meta = this.meta.apply(basicArgs, args) || null
 		const defaultArgs = {...basicArgs, meta}
@@ -58,21 +52,27 @@ function Awral (asyncFunction) {
 		}
 
 		this.pending && this.pending(defaultArgs)
-		const fnPayload = this.fnPayload.apply(defaultArgs, args)
+		const fnPayload = this.transformPayload.apply(defaultArgs, args)
 		// FIXME: We should catch errors inside	`asyncFunction`
 		// try {} catch (e) {}
-		const res = await asyncFunction(fnPayload)
-		const isSuccess = this.check(res)
-		const status = isSuccess ? {success: true} : {error: true}
-		const payload = this.transformResult(res)
+		new Promise((resolve, reject) => {
+			console.log(asyncFunction(fnPayload))
+			resolve(asyncFunction(fnPayload))
+		}).then((res) => {
+			const isSuccess = this.check(res)
+			const status = isSuccess ? 'success' : 'fail'
+			const payload = this.transformResult(res)
 
-		if (isSuccess) {
-			this.success({...defaultArgs, payload})
-		} else {
-			this.fail({...defaultArgs, payload, error: true})
-		}
-		this.finally && this.finally(defaultArgs)
-		return this.resolve({payload, status})
+			if (isSuccess) {
+				this.success({...defaultArgs, payload})
+			} else {
+				this.fail({...defaultArgs, payload, error: true})
+			}
+			this.finally && this.finally(defaultArgs)
+			return this.resolve({payload, status})
+		}).catch((err) => {
+			this.fail({...defaultArgs, payload: err, error: true})
+		})
 	}
 }
 
