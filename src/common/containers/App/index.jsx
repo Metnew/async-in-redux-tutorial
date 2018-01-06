@@ -16,6 +16,7 @@ import {
 	getLayoutMobileStatuses
 } from 'selectors'
 import ReactGA from 'react-ga'
+import hljs from 'highlight.js'
 // Import styled components
 import {
 	PageLayout,
@@ -62,7 +63,15 @@ class App extends Component<Props> {
 
 		if (process.env.BROWSER && process.env.GA_ID) {
 			ReactGA.initialize(process.env.GA_ID)
+			ReactGA.pageview(process.env.GA_ID)
 		}
+
+		// Init highlight.js options
+		hljs.configure({
+			tabReplace: '  ', // 2 spaces
+			classPrefix: 'js'
+		})
+		hljs.initHighlighting()
 	}
 
 	render () {
