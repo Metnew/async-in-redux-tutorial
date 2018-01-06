@@ -1,25 +1,7 @@
 // @flow
 // Styles
-// If you want full SUI CSS:
-// import 'semantic-ui-css/semantic.css'
-// If you want only some components from SUI:
-import 'semantic-ui-css/components/button.css'
-import 'semantic-ui-css/components/container.css'
-import 'semantic-ui-css/components/dimmer.css'
-import 'semantic-ui-css/components/divider.css'
-import 'semantic-ui-css/components/grid.css'
-import 'semantic-ui-css/components/header.css'
-import 'semantic-ui-css/components/form.css'
-import 'semantic-ui-css/components/icon.css'
-import 'semantic-ui-css/components/image.css'
-import 'semantic-ui-css/components/input.css'
-import 'semantic-ui-css/components/menu.css'
-import 'semantic-ui-css/components/label.css'
-import 'semantic-ui-css/components/list.css'
-import 'semantic-ui-css/components/loader.css'
-import 'semantic-ui-css/components/reset.css'
-import 'semantic-ui-css/components/sidebar.css'
-import 'semantic-ui-css/components/site.css'
+import 'semantic-ui-css/semantic.css'
+import 'highlight.js/styles/ocean.css'
 // babel polyfill (ie 10-11) + fetch polyfill
 import 'babel-polyfill'
 import 'isomorphic-fetch'
