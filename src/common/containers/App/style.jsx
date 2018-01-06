@@ -30,7 +30,7 @@ export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
 				max-width: calc(100% - 150px);
 				`
 		)
-	}};
+	}}
 `
 
 export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`

@@ -36,11 +36,18 @@ function asyncComponentCreator (url) {
 	})
 }
 
-const [Intro, NoRedux, Links] = [
+const [Intro, XHRAgent, NoRedux, NoThunk, PromiseMiddleware, Thunk, Awral, ActionLifecycle, ReduxForm, Summary] = [
 	'Intro',
+	'XHR_Agent',
 	'NoRedux',
-	'Links'
-].map(a => asyncComponentCreator(a))
+	'NoThunk',
+	'PromiseMiddleware',
+	'Thunk',
+	'Awral',
+	'ActionLifecycle',
+	'ReduxForm',
+	'Summary'
+].map(asyncComponentCreator)
 
 const routes: Array<RouteItem> = [
 	{
@@ -49,29 +56,106 @@ const routes: Array<RouteItem> = [
 		tag: Route,
 		component: Intro,
 		meta: {
-			icon: 'newspaper',
+			icon: 'home',
 			name: 'Intro',
 			sidebarVisible: true
 		}
 	},
 	{
-		path: '/links',
+		path: '/no-xhr-wrapper',
 		exact: true,
 		tag: Route,
-		component: Links,
+		component: XHRAgent,
 		meta: {
-			name: 'Links',
+			icon: 'remove',
+			name: 'No XHR wrapper',
+			sidebarVisible: true
+		}
+	},
+	{
+		path: '/no-redux',
+		exact: true,
+		tag: Route,
+		component: NoRedux,
+		meta: {
+			icon: 'remove',
+			name: 'No Redux',
+			sidebarVisible: true
+		}
+	},
+	{
+		path: '/no-thunk',
+		exact: true,
+		tag: Route,
+		component: NoThunk,
+		meta: {
+			icon: 'remove',
+			name: 'No Thunk',
+			sidebarVisible: true
+		}
+	},
+	{
+		path: '/thunk',
+		exact: true,
+		tag: Route,
+		component: Thunk,
+		meta: {
+			name: 'Thunk',
+			icon: 'checkmark',
+			sidebarVisible: true
+		}
+	},
+	{
+		path: '/promise-middleware',
+		exact: true,
+		tag: Route,
+		component: PromiseMiddleware,
+		meta: {
+			icon: 'checkmark',
+			name: 'Promise Middleware',
+			sidebarVisible: true
+		}
+	},
+	{
+		path: '/action-lifecycle',
+		exact: true,
+		tag: Route,
+		component: ActionLifecycle,
+		meta: {
+			name: 'Action Lifecycle',
 			icon: 'bookmark',
 			sidebarVisible: true
 		}
 	},
 	{
-		path: '/react-only',
+		path: '/awral',
 		exact: true,
 		tag: Route,
-		component: NoRedux,
+		component: Awral,
 		meta: {
-			name: 'Without Redux',
+			name: 'AWRAL',
+			icon: 'bookmark',
+			sidebarVisible: true
+		}
+	},
+	{
+		path: '/redux-form',
+		exact: true,
+		tag: Route,
+		component: ReduxForm,
+		meta: {
+			icon: 'checkmark',
+			name: 'Redux form',
+			sidebarVisible: true
+		}
+	},
+	{
+		path: '/summary',
+		exact: true,
+		tag: Route,
+		component: Summary,
+		meta: {
+			name: 'Summary',
 			icon: 'bookmark',
 			sidebarVisible: true
 		}
