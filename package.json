@@ -95,7 +95,7 @@
     "husky": "^0.14.3",
     "img-loader": "^2.0.0",
     "jest": "^22.0.4",
-    "jest-styled-components": "^4.9.0",
+    "jest-styled-components": "^5.0.0",
     "nock": "^9.1.5",
     "node-noop": "^1.0.0",
     "node-sass": "^4.7.2",
