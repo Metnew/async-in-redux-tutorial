@@ -1,49 +1,80 @@
-# Async-in-Redux: [demo](https://suicrux.now.sh/auth)
-> Demo sometimes becomes frozen by `now`. Retry in a few minutes, if it doesn't work.
+# About async&actions in redux
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/suicrux.svg)](https://greenkeeper.io/)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fd637f7c63e74da199cec17f3f0e3fd9)](https://www.codacy.com/app/Metnew/suicrux?utm_source=github.com&utm_medium=referral&utm_content=Metnew/suicrux&utm_campaign=badger)
+> Demo: https://async-redux.now.sh
 
-<div><a href="https://travis-ci.org/Metnew/suicrux">
-  <img src="https://travis-ci.org/Metnew/suicrux.svg?branch=master" alt="Build Status">
-</a>
-<a href="https://gitter.im/suicrux/Lobby?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge">
-  <img src="https://badges.gitter.im/suicrux/Lobby.svg" alt="Join the chat at https://gitter.im/suicrux/Lobby">
-</a>
-<a href="https://www.bithound.io/github/Metnew/suicrux">
-  <img src="https://www.bithound.io/github/Metnew/suicrux/badges/code.svg" alt="bitHound Code">
-</a>
-<a href="https://www.bithound.io/github/Metnew/suicrux">
-  <img src="https://www.bithound.io/github/Metnew/suicrux/badges/score.svg" alt="bitHound Overall Score">
-</a>
- <a href="https://codecov.io/gh/Metnew/suicrux">
-  <img src="https://codecov.io/gh/Metnew/suicrux/branch/master/graph/badge.svg" alt="codecov">
-</a></div>
+> Boilerplate: https://github.com/Metnew/next-semantic-ui-react
 
-## What is this?
+## Real-life async action
 
-Interactive tutorial for [my article on Medium](). Demo: [].
-Based on Suicrux boilerplate.
+When you work with async stuff you probably have next code in your
+container:
 
-Run locally:
-```bash
-  # Install
-  git clone https://github.com/Metnew/async-in-redux-tutorial.git
-  cd async-in-redux-tutorial
-  npm install
-  # Development
-  npm run dev
-  # Build production
-  npm run build
-  # Start production
-  npm run start
+```js
+const mapStateToProps = state => ({userId: state.userId})
+const mapDispatchToProps = dispatch => ({
+  getUser(id) {
+    dispatch(GET_USER(id))
+  }
+})
 ```
 
-### Something very important:
+Where `GET_USER` is the next async action:
 
-> Have a question? Ask! :wink:
+```javascript
+export const GET_USER = id => async (dispatch, getState) => {
+  const state = getState()
+  // 1. Validate input before dispatching `pending`
+  if (id === 111 && state.user === "Alex") {
+    // 1.1 Do something if input is invalid
+    const payload = {
+      error: `You can't do it, because you're Alex and your id is 111`
+    }
+    dispatch({type: "GET_USER_FAIL", meta: id, payload, error: true})
+    return {payload, status: {error: true}}
+  }
+  // 2. Dispatch `PENDING` action
+  dispatch({type: "GET_USER_PENDING", meta: id})
+  // 3. Create payload for async function
+  const apiPayload = {id, token: state.token}
+  // 4. Obtain result from async function
+  const result = await getUserFromServer(apiPayload)
 
-PRs, issues, questions, enhancements are always welcome.
+  // 5. Check is request successful or failed (contains errors).
+  const status = result.ok && result !== 400 ? {success: true} : {error: true}
+  // 6. Get data from request object (typically accessible as `result.data`)
+  const payload = resultFromServer.data
+  if (resultFromServer.ok) {
+    // 7.if result successful -> dispatch `SUCCESS` action
+    dispatch({type: "GET_USER_SUCCESS", meta: id, payload})
+  } else {
+    // 8.if result failed -> dispatch `FAIL` action
+    dispatch({type: "GET_USER_FAIL", meta: id, payload, error: true})
+  }
+
+  // 9. Return values (typical case for Redux-form, but about it later)
+  return {payload, status}
+}
+```
+
+## Async action's lifecycle
+
+* Validate input before dispatching `pending` and do something if input is invalid
+* Dispatch `PENDING` action
+* Create payload for async function
+* Get result of async function
+* Check is request successful or failed (contains errors).
+* Get data from request object (typically accessible as `result.data`)
+* if result successful -> dispatch `SUCCESS` action
+* if result failed -> dispatch `FAIL` action
+* Return values
+
+> In a big projects duplicating this _lifecycle_ in each action isn't DRY. Imagine that you have 300 similar actions in your app. Much logic will be duplicated.
+
+## Libs aimed to solve this problem
+
+### promise-middleware
+
+### redux-saga
 
 ### Author
 

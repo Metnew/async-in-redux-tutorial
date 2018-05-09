@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Build
 dist
+.next
 
 # Runtime data
 pids
@@ -28,9 +29,6 @@ coverage
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
-
 # Dependency directories
 node_modules
 flow-typed
@@ -41,5 +39,3 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
-
-src/server/config/ssl/server.*

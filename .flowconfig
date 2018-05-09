@@ -1,8 +1,6 @@
 [ignore]
-./webpack_config
 
 [include]
-./src
 
 [libs]
 
