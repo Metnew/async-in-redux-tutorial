@@ -47,7 +47,7 @@
 		"caniuse-lite": "^1.0.30000832",
 		"css-loader": "^0.^1.0.30000836",
 		"eslint": "^4.19.1",
-		"eslint-config-standard": "^11.0.0",
+		"eslint-config-standard": "^12.0.0",
 		"eslint-loader": "^2.0.0",
 		"eslint-plugin-babel": "^5.1.0",
 		"eslint-plugin-flowtype": "^2.46.3",
