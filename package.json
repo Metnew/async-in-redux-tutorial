@@ -4,7 +4,7 @@
 	"main": "pages/index.js",
 	"description": "Notes about redux async actions lifecycle",
 	"dependencies": {
-		"@mdx-js/mdx": "^0.9.0",
+		"@mdx-js/mdx": "^1.0.23",
 		"@zeit/next-css": "^0.1.5",
 		"@zeit/next-sass": "^0.1.2",
 		"@zeit/next-source-maps": "0.0.2",
