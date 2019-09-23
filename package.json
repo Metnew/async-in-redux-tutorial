@@ -24,7 +24,7 @@
 		"semantic-ui-react": "^0.80.0",
 		"styled-components": "^3.2.6",
 		"webpack": "^3.10.0",
-		"webpack-manifest-plugin": "^2.0.2"
+		"webpack-manifest-plugin": "^2.1.0"
 	},
 	"devDependencies": {
 		"autoprefixer": "^8.4.1",
