@@ -44,7 +44,7 @@
 		"babel-preset-stage-0": "^6.24.1",
 		"babel-register": "6.26.0",
 		"babel-runtime": "^6.26.0",
-		"caniuse-lite": "^1.0.30000832",
+		"caniuse-lite": "^1.0.30000997",
 		"css-loader": "^0.^1.0.30000836",
 		"eslint": "^4.19.1",
 		"eslint-config-standard": "^11.0.0",
