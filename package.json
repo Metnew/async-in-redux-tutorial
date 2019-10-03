@@ -15,7 +15,7 @@
 		"next": "^6.0.0",
 		"optimize-js-plugin": "0.0.4",
 		"react": "^16.10.2",
-		"react-dom": "^16.3.2",
+		"react-dom": "^16.10.2",
 		"react-redux": "^5.0.7",
 		"redux": "^4.0.0",
 		"redux-devtools-extension": "^2.13.2",
